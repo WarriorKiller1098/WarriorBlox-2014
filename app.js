@@ -22,6 +22,9 @@ http.createServer(function(req, res) {
   } else if (path == "/assets/logo.png") {
     sendf(res, "assets/logo.png");
     res.end();
+  } else if (path == "/style.css") {
+    sendf(res, "assets/style.css");
+    res.end();
   }
 }).listen(port);
 
