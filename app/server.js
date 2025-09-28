@@ -9,10 +9,7 @@ http.createServer(function(req, res) {
       query = parsedpath.split("?")[1].replace("?", "")
   }
   console.log("Method requested: " + req.method + ", with endpoint " + path);
-  if (path == "/") {
-    res.write("A test at render");
-    res.end();
-  } else if (path == "/status") {
+  if (path == "/status") {
     res.write("good and healthy :)");
     res.end();
   }
