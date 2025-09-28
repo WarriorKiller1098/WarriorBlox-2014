@@ -12,7 +12,7 @@ http.createServer(function(req, res) {
   }
   console.log("Method requested: " + req.method + ", with endpoint " + path);
   if (path == "/") {
-    res.write("hai!");
+    res.send("index.html");
     res.end();
   } else if (path == "/test") {
     res.write("hello");
