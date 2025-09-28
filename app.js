@@ -14,8 +14,8 @@ http.createServer(function(req, res) {
   if (path == "/") {
     sendf(res, "index.html");
     res.end();
-  } else if (path == "/test") {
-    res.write("hello");
+  } else if (path == "/status") {
+    res.write("i am... good and healthy :D");
     res.end();
   }
 }).listen(port);
