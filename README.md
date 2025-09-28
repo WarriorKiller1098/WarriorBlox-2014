@@ -10,6 +10,7 @@ is MUCH BETTER! This will have really "eventually"..
 * Avatars and friends!
 * Games like WAAPP!
 * Multiplayer!
+
 And the old Godot one had no multiplayer, beta GUI, and no avatars!
 And this will be better cus its based on original Roblox! So..
 
