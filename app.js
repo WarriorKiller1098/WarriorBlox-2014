@@ -1,7 +1,7 @@
 const url = require("url")
 const http = require("http")
 const port = 10000
-
+const fs = require("fs")
 http.createServer(function(req, res) {
   const urlpath = url.parse(req.url, true)
   const parsedpath = urlpath.path
@@ -12,10 +12,15 @@ http.createServer(function(req, res) {
   }
   console.log("Method requested: " + req.method + ", with endpoint " + path);
   if (path == "/") {
-    res.send("index.html");
+    sendf(res, "index.html");
     res.end();
   } else if (path == "/test") {
     res.write("hello");
     res.end();
   }
 }).listen(port);
+
+function sendf(res, file) {
+  res.write(fs.readFileSync(__dirname + "/" + file));
+  res.end();
+}
