@@ -1,0 +1,28 @@
+
+  body {
+  margin: 0px;
+  font-family: sans-serif;
+  }
+
+  .info {
+  margin: 10px;
+  }
+
+  .topbar {
+  background-image: linear-gradient(blue,darkblue);
+  padding: 10px;
+  }
+
+  .title {
+  font-weight: 999; /* Make the font extra bold */
+  color: white;
+  font-size: 21px;
+  padding-right: 10px;
+  -webkit-text-stroke: 0.3px red; /* Slightly thicker red outline */
+  }
+
+  .topbar a {
+  color: white;
+  padding-left: 10px;
+  text-decoration: none;
+  }
