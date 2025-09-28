@@ -13,7 +13,6 @@ http.createServer(function(req, res) {
   console.log("Method requested: " + req.method + ", with endpoint " + path);
   if (path == "/") {
     sendf(res, "index.html");
-    res.end();
   } else if (path == "/status") {
     res.write("i am... good and healthy :D");
     res.end();
