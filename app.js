@@ -16,6 +16,9 @@ http.createServer(function(req, res) {
   } else if (path == "/status") {
     res.write("i am... good and healthy :D");
     res.end();
+  } else if (path == "/games/list") {
+    sendf(res, "games/list.html");
+    res.end();
   }
 }).listen(port);
 
