@@ -1,4 +1,5 @@
 const http = require("http")
+const port = 10000
 
 http.createServer(function(req, res) {
   const urlpath = url.parse(req.url, true)
@@ -10,10 +11,10 @@ http.createServer(function(req, res) {
   }
   console.log("Method requested: " + req.method + ", with endpoint " + path);
   if (path == "/") {
-    res.write("A test at render");
+    res.write("hai!");
     res.end();
-  } else if (path == "/status") {
-    res.write("good and healthy :)");
+  } else if (path == "/test") {
+    res.write("hello");
     res.end();
   }
-})
+}).listen(port);
