@@ -17,14 +17,17 @@ http.createServer(function(req, res) {
     res.write("i am... good and healthy :D");
     res.end();
   } else if (path == "/games/list") {
-    sendf(res, "games/list.html");
-    res.end();
+        sendf(res, "games/list.html");
+        res.end();
   } else if (path == "/assets/logo.png") {
-    sendf(res, "assets/logo.png");
-    res.end();
+        sendf(res, "assets/logo.png");
+        res.end();
   } else if (path == "/style.css") {
-    sendf(res, "assets/style.css");
-    res.end();
+        sendf(res, "assets/style.css");
+        res.end();
+  } else if (path == "/games/style.css") {
+        sendf(res, "assets/style.css");
+        res.end();
   }
 }).listen(port);
 
