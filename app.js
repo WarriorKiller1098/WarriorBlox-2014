@@ -18,7 +18,6 @@ http.createServer(function(req, res) {
     res.end();
   } else if (path == "/games/list") {
         sendf(res, "games/list.html");
-        res.end();
   } else if (path == "/assets/logo.png") {
         sendf(res, "assets/logo.png");
         res.end();
