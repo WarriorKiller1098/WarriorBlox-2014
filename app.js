@@ -28,6 +28,9 @@ http.createServer(function(req, res) {
   } else if (path == "/games/style.css") {
         sendf(res, "assets/style.css");
         res.end();
+  } else if (path == "/thumbnail1.jpg") {
+        sendf(res, "assets/thumbnail1.jpg");
+        res.end();
   }
 }).listen(port);
 
