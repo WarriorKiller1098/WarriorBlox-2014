@@ -15,3 +15,5 @@ And the old Godot one had no multiplayer, beta GUI, and no avatars!
 And this will be better cus its based on original Roblox! So..
 
 Welcome, to, WB!
+
+Discord: https://discord.com/invite/mPMpByu4sv
