@@ -10,7 +10,7 @@ body {
 .topbar {
     background-image: linear-gradient(blue,darkblue);
     padding: 10px;
-    padding-bottom: 0px;
+    padding-bottom: 5px;
     display: flex;
     align-items: center;
 }
