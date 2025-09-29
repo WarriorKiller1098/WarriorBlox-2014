@@ -4,7 +4,7 @@ We're trying to make the 2014 Roblox client to be up back and running like it us
 
 # Info
 WarriorBlox was previously made with Godot, a game engine, 
-however it was unfinished cus we lost it! Thia..
+however it was unfinished cus we lost it! This..
 is MUCH BETTER! This will have really "eventually"..
 * Working game servers
 * Avatars and friends!
