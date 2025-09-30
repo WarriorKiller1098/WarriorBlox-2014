@@ -29,3 +29,7 @@ body {
     padding-top: 60px;
     padding: 10px;
 }
+
+.game {
+    display: block;
+}
