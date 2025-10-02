@@ -30,6 +30,12 @@ body {
     padding: 10px;
 }
 
+
+.games-page h1 {
+    padding-bottom: 60px;
+}
+
+
 .game {
     display: flex;
     flex-direction: column;
