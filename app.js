@@ -30,7 +30,8 @@ http.createServer(function(req, res) {
   } else if (path == "/games/thumbnail1.jpg") {
         sendf(res, "assets/thumbnail1.jpg");
         res.end();
-  }
+  } else if (path == "/games/start") {
+        sendf(res, "games/start.html");
 }).listen(port);
 
 function sendf(res, file) {
