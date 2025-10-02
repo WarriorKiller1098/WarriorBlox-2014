@@ -30,11 +30,9 @@ body {
     padding: 10px;
 }
 
-
 .games-page h1 {
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
-
 
 .game {
     display: flex;
@@ -46,6 +44,6 @@ body {
 .title {
     padding-top: 10px;
     padding-bottom: 5px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
 }
