@@ -32,7 +32,7 @@ http.createServer(function(req, res) {
         res.end();
   } else if (path == "/games/start") 
     sendf(res, "games/start.html");
-  } else if (path == "/games/list") {
+  } else if (path == "/games/list")
     sendf(res, "games/list.html");
 }).listen(port);
 
