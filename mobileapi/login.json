@@ -1,3 +1,7 @@
+const udata = body.split("&")
+const uname = udata[0].split("=")[1]
+const upass = udata[1].split("=")[1]
+
 {
   "Status": "OK",
   "UserInfo": {
