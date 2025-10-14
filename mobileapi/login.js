@@ -13,4 +13,4 @@ let userData = {
     "IsAnyBuildersClubMember": true,
     "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
 }
-return userData
+return JSON.stringify(userData)
