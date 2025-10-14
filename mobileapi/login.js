@@ -12,5 +12,6 @@ let userData = {
     "TicketsBalance": 12000,
     "IsAnyBuildersClubMember": true,
     "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
+    }
 }
 return JSON.stringify(userData)
