@@ -33,7 +33,8 @@ http.createServer(function(req, res) {
         res.end();
     } else if (path == "/games/start") {
         sendf(res, "games/start.html");
-    } else if (path == "/mobileapi/login")
+  else if (req.method == "POST") {
+    if (path == "/mobileapi/login")
         sendf(res, "mobileapi/login.js");
   }}).listen(port);
 
