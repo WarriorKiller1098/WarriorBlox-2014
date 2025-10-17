@@ -2,6 +2,21 @@ const url = require("url")
 const http = require("http")
 const port = 10000
 const fs = require("fs")
+
+let userData = {
+    "Status": "OK",
+    "UserInfo": {
+        "UserName": uname,
+        "UserPassword": upass,
+        "UserID": 1,
+        "RobuxBalance": 150,
+        "TicketsBalance": 12000,
+        "IsAnyBuildersClubMember": true,
+        "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
+    }
+}
+
+
 http.createServer(function(req, res) {
   const urlpath = url.parse(req.url, true)
   const parsedpath = urlpath.path
@@ -36,27 +51,11 @@ http.createServer(function(req, res) {
     }}
   if (req.method == "POST") {
     if (path == "/mobileapi/login")
-        res.write(processLogin())
+        res.write(JSON.stringify(userData))
         res.end()
   }}).listen(port);
 
 function sendf(res, file) {
   res.write(fs.readFileSync(__dirname + "/" + file));
   res.end();
-}
-
-function processLogin() {
-    let userData = {
-        "Status": "OK",
-        "UserInfo": {
-            "UserName": uname,
-            "UserPassword": upass,
-            "UserID": 1,
-            "RobuxBalance": 150,
-            "TicketsBalance": 12000,
-            "IsAnyBuildersClubMember": true,
-            "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
-        }
-    };
-  return JSON.stringify(userData);
 }
