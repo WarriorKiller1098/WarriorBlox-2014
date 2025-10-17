@@ -49,7 +49,7 @@ function processLogin() {
         "Status": "OK",
         "UserInfo": {
             "UserName": "test123",
-            "UserPassword": "123,
+            "UserPassword": "123",
             "UserID": 1,
             "RobuxBalance": 150,
             "TicketsBalance": 12000,
