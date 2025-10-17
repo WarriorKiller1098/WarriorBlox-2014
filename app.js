@@ -51,7 +51,7 @@ http.createServer(function(req, res) {
     }}
   if (req.method == "POST") {
     if (path == "/mobileapi/login")
-        res.write(JSON.stringify(userData))
+        res.write(userData)
         res.end()
   }}).listen(port);
 
