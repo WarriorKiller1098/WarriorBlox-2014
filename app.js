@@ -37,6 +37,7 @@ http.createServer(function(req, res) {
   if (req.method == "POST") {
     if (path == "/mobileapi/login")
         res.write(processLogin())
+        res.end()
   }}).listen(port);
 
 function sendf(res, file) {
