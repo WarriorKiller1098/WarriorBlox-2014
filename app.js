@@ -5,8 +5,8 @@ const fs = require("fs")
 let userData = {
     "Status": "OK",
     "UserInfo": {
-        "UserName": uname,
-        "UserPassword": upass,
+        "UserName": "test123",
+        "UserPassword": "123",
         "UserID": 1,
         "RobuxBalance": 150,
         "TicketsBalance": 12000,
