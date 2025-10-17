@@ -15,8 +15,8 @@ http.createServer(function(req, res) {
     if (path == "/") {
       sendf(res, "index.html");
     } else if (path == "/status") {
-      res.write("i am... good and healthy :D");
-      res.end();
+        res.write("i am... good and healthy :D");
+        res.end();
     } else if (path == "/games/list") {
         sendf(res, "games/list.html");
     } else if (path == "/assets/logo.png") {
@@ -36,10 +36,26 @@ http.createServer(function(req, res) {
     }}
   if (req.method == "POST") {
     if (path == "/mobileapi/login")
-        sendf(res, "mobileapi/login.js");
+        res.write(processLogin())
   }}).listen(port);
 
 function sendf(res, file) {
   res.write(fs.readFileSync(__dirname + "/" + file));
   res.end();
+}
+
+function processLogin() {
+    let userData = {
+        "Status": "OK",
+        "UserInfo": {
+            "UserName": uname,
+            "UserPassword": upass,
+            "UserID": 1,
+            "RobuxBalance": 150,
+            "TicketsBalance": 12000,
+            "IsAnyBuildersClubMember": true,
+            "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
+        }
+    };
+  return JSON.stringify(userData);
 }
