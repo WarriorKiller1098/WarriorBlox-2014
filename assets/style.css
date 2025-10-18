@@ -1,7 +1,6 @@
 body {
     margin: 0px;
-    font-family: sans-serif;
-    font-family: "Source Sans 3", "Source Sans 3";
+    font-family: "Source Sans 3", sans-serif;
     font-optical-sizing: auto;
     font-weight: 330;
     font-style: normal;
