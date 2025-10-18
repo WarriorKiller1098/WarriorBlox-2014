@@ -2,6 +2,7 @@ const url = require("url")
 const http = require("http") 
 const port = 10000
 const fs = require("fs") 
+
 let userData = {
     "Status": "OK",
     "UserInfo": {
@@ -14,6 +15,7 @@ let userData = {
         "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
     }
 }
+
 http.createServer(function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
