@@ -41,6 +41,7 @@ body {
 }
 
 .title {
+    font-family: "Source Sans 3";
     padding-top: 10px;
     padding-bottom: 5px;
     font-size: 18px;
@@ -49,6 +50,7 @@ body {
 }
 
 .gametitle {
+    font-family: "Source Sans 3";
     padding-top: 10px;
     font-size: 24px;
     font-weight: bold;
