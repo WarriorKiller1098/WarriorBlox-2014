@@ -58,6 +58,7 @@ body {
 
 .play-button {
     background-image: linear-gradient(green, darkgreen);
-    padding: 20px:
+    padding: 20px;
     color: white;
+    text-decoration: none;
 }
