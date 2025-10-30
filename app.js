@@ -51,10 +51,18 @@ http.createServer(function(req, res) {
         } else if (path == "/home") {
             sendf(res, "2015/home.html");
         }
+        // other sfuff that work both in 2014 and 2015
+        } else if (path == "/other/bc.png") {
+            sendf(res, "assets/bc.png");
+            res.end();
+        } else if (path == "/mobile-app-upgrades") {
+            sendf(res, "games/mobile-app-upgrades.html");
+        }
     }
     if (req.method == "POST") {
-        if (path == "/mobileapi/login") res.write(JSON.stringify(userData))
-        res.end()
+        if (path == "/mobileapi/login")
+            res.write(JSON.stringify(userData))
+            res.end()
     }
 }).listen(port);
 
