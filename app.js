@@ -47,6 +47,9 @@ http.createServer(function(req, res) {
             res.end();
         } else if (path == "/games/start") {
             sendf(res, "games/start.html");
+        // 2015 trash sfuff
+        } else if (path == "/home") {
+            sendf(res, "2015/home.html");
         }
     }
     if (req.method == "POST") {
