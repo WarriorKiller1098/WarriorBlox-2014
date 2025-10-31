@@ -55,7 +55,7 @@ http.createServer(function(req, res) {
             sendf(res, "assets/bc.png");
             res.end();
         } else if (path == "/mobile-app-upgrades") {
-            sendf(res, "games/mobile-app-upgrades.html");
+            sendf(res, "other/mobile-app-upgrades.html");
         }
     }
     if (req.method == "POST") {
