@@ -58,7 +58,7 @@ http.createServer(function(req, res) {
         } else if (path == "/mobile-app-upgrades") {
             sendf(res, "games/mobile-app-upgrades.html");
         }
-    )
+    }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
             res.write(JSON.stringify(userData))
