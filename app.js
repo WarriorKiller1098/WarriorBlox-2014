@@ -6,7 +6,7 @@ const fs = require("fs")
 let userData = {
     "Status": "OK",
     "UserInfo": {
-        "UserName": "test123",
+        "UserName": "WarriorBlox",
         "UserPassword": "123",
         "UserID": 1,
         "RobuxBalance": 150,
