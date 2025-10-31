@@ -19,7 +19,7 @@ let userData = {
 http.createServer(function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
-    const query = urlpath.query
+    let query = urlpath.query
     const path = parsedpath.split("?")[0]
     if (path.charAt(path.length - 1) == "?") {
         query = parsedpath.split("?")[1].replace("?", "")
