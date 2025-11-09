@@ -2,7 +2,17 @@ const url = require("url")
 const http = require("http") 
 const port = 10000
 const fs = require("fs") 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://gotimenowinc123_db_user:aIpIVmaX0ugjC13D@wbcluster.lzd6kt9.mongodb.net/?appName=WBCluster";
 
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 let userData = {
     "Status": "OK",
     "UserInfo": {
