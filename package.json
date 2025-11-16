@@ -1,7 +1,7 @@
 {
-  "name": "my-node-app",
+  "name": "WarTV",
   "version": "1.0.0",
-  "description": "A simple Node.js application",
+  "description": "WarriorBlox is a 2014 roblox revival.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -12,7 +12,7 @@
     "express",
     "example"
   ],
-  "author": "Your Name",
+  "author": "WarriorKiller1098",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
