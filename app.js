@@ -93,3 +93,5 @@ function sendf(res, file) {
     res.write(fs.readFileSync(__dirname + "/" + file));
     res.end();
 }
+
+run().catch(console.dir);
