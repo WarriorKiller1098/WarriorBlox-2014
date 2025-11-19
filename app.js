@@ -46,6 +46,11 @@ let userData = {
     }
 }
 
+function GetUserData(username) {
+    let userData = await client.db("WarriorBloxDB").collection("users").findOne({UserName: username})
+    return userData
+}
+
 http.createServer(function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
