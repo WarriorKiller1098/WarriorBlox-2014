@@ -3,8 +3,9 @@ const http = require("http")
 const port = 10000
 const fs = require("fs") 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = process.env.MONGO_URI
 const process = require("process")
+const uri = process.env.MONGO_URI
+
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
