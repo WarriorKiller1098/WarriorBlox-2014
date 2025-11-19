@@ -95,8 +95,41 @@ http.createServer(function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-            res.write(JSON.stringify(userData));
-            res.end();
+            const userdata = body.split("&");
+                const password = userdata[1].split("=")[1];
+                const username = userdata[0].split("=")[1];
+                const userData = await GetUserData(username)
+                let finishedData = {
+                    Status: "",
+                    UserInfo: ""
+                }
+                console.log(userData);
+                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == password) {
+            if (userData.IsBanned == false) {
+                    finishedData.Status = "OK"
+                    finishedData.UserInfo = userData;
+                    console.log(JSON.stringify(finishedData))
+            const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
+            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + isSecure ? "; Secure" : ""});
+            delete userData.UserPassword
+                delete userData.SecurityToken
+                delete userData.lastDailyAward
+                    res.write(JSON.stringify(finishedData))
+            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+                    res.end();
+            } else {
+            delete userData.UserPassword
+                delete userData.SecurityToken
+                delete userData.lastDailyAward
+            finishedData.Status = "InvalidPassword"
+            finishedData.UserInfo = userData;
+            res.end()
+            }
+                } else {
+                    finishedData.Status = "InvalidPassword"
+                    res.write(JSON.stringify(finishedData));
+                    res.end();
+                }
         }
     }
 }).listen(port);
