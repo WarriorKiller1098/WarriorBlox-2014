@@ -46,7 +46,7 @@ let userData = {
     }
 }
 
-function GetUserData(username) {
+async function GetUserData(username) {
     let userData = await client.db("WarriorBloxDB").collection("users").findOne({UserName: username})
     return userData
 }
