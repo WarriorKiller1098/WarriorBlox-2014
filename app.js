@@ -51,7 +51,7 @@ function GetUserData(username) {
     return userData
 }
 
-http.createServer(function(req, res) {
+http.createServer(async function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
     let query = urlpath.query
