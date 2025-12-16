@@ -33,18 +33,6 @@ process.on("SIGINT", async function() {
     process.exit();
 })
            
-let userData = {
-    "Status": "OK",
-    "UserInfo": {
-        "UserName": "WarriorBlox",
-        "UserPassword": "123",
-        "UserID": 1,
-        "RobuxBalance": 150,
-        "TicketsBalance": 12000,
-        "IsAnyBuildersClubMember": true,
-        "ThumbnailUrl": "https://14blox.strangled.net/getUserAvatarImage?userId=1"
-    }
-}
 
 async function GetUserData(username) {
     let userData = await client.db("WarriorBloxDB").collection("users").findOne({UserName: username})
@@ -95,41 +83,7 @@ http.createServer(async function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-            const userdata = body.split("&");
-                const password = userdata[1].split("=")[1];
-                const username = userdata[0].split("=")[1];
-                const userData = await GetUserData(username)
-                let finishedData = {
-                    Status: "",
-                    UserInfo: ""
-                }
-                console.log(userData);
-                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == password) {
-            if (userData.IsBanned == false) {
-                    finishedData.Status = "OK"
-                    finishedData.UserInfo = userData;
-                    console.log(JSON.stringify(finishedData))
-            const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
-            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + isSecure ? "; Secure" : ""});
-            delete userData.UserPassword
-                delete userData.SecurityToken
-                delete userData.lastDailyAward
-                    res.write(JSON.stringify(finishedData))
-            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
-                    res.end();
-            } else {
-            delete userData.UserPassword
-                delete userData.SecurityToken
-                delete userData.lastDailyAward
-            finishedData.Status = "InvalidPassword"
-            finishedData.UserInfo = userData;
-            res.end()
-            }
-                } else {
-                    finishedData.Status = "InvalidPassword"
-                    res.write(JSON.stringify(finishedData));
-                    res.end();
-                }
+          res.write(JSON.stringify(userData);
         }
     }
 }).listen(port);
