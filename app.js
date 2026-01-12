@@ -27,6 +27,7 @@ async function run() {
     await client.close();
   }
 }
+run().catch(console.dir);
 process.on("SIGINT", async function() {
     await client.close()
     console.log("\nClosing MongoDB connection!")
