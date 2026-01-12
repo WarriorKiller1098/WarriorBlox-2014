@@ -27,7 +27,6 @@ async function run() {
     await client.close();
   }
 }
-run().catch(console.dir);
 process.on("SIGINT", async function() {
     await client.close()
     console.log("\nClosing MongoDB connection!")
@@ -84,7 +83,7 @@ http.createServer(async function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-          let userData = GetUserData(WBtest)
+          let userData = GetUserData("WBtest");
           res.write(JSON.stringify(userData));
         }
     }
