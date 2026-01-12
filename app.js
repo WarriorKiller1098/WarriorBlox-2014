@@ -83,8 +83,8 @@ http.createServer(async function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-          let userData = GetUserData("WBtest");
-          res.write(JSON.stringify(userData));
+          let userDataM = GetUserData("WBtest");
+          res.write(JSON.stringify(userDataM));
         }
     }
 }).listen(port);
