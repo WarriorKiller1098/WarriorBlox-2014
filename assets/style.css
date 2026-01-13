@@ -66,3 +66,12 @@ body {
     border: 2px black solid;
     width: 20%;
 }
+
+.infofooter {
+    position: absolute;
+    bottom: 0;
+    background-color: gray;
+    color: darkgray;
+    padding: 20px;
+}
+
