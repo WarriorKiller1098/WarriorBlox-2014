@@ -40,6 +40,9 @@ async function GetUserData(username) {
     return userData
 }
 
+function str(i) { 
+  return String(i)
+}
 http.createServer(async function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
