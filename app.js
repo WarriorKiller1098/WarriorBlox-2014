@@ -5,6 +5,7 @@ const fs = require("fs")
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const process = require("process")
 const uri = process.env.MONGO_URI
+let sessions = {}
 
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -99,7 +100,7 @@ http.createServer(async function(req, res) {
             delete userData.UserPassword
                 delete userData.SecurityToken
                     res.write(JSON.stringify(finishedData))
-            // "Throws error, can't use" sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
                     res.end();
             } else {
             delete userData.UserPassword
