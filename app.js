@@ -83,13 +83,13 @@ http.createServer(async function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-          const userData = await GetUserData("WBtest")
+          const userData = await GetUserData("WBtest");
                 let finishedData = {
                     Status: "",
                     UserInfo: ""
                 }
                 console.log(userData);
-                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == testpass) {
+                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == "testpass") {
             if (userData.IsBanned == false) {
                     finishedData.Status = "OK"
                     finishedData.UserInfo = userData;
