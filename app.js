@@ -99,7 +99,7 @@ http.createServer(async function(req, res) {
             delete userData.UserPassword
                 delete userData.SecurityToken
                     res.write(JSON.stringify(finishedData))
-            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+            // "Throws error, can't use" sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
                     res.end();
             } else {
             delete userData.UserPassword
