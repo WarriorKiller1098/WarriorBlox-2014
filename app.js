@@ -83,8 +83,37 @@ http.createServer(async function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-          let userDataM = await GetUserData("WBtest");
-          res.write(JSON.stringify(userDataM));
+          const userData = await GetUserData("WBtest")
+                let finishedData = {
+                    Status: "",
+                    UserInfo: ""
+                }
+                console.log(userData);
+                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == password) {
+            if (userData.IsBanned == false) {
+                    finishedData.Status = "OK"
+                    finishedData.UserInfo = userData;
+                    console.log(JSON.stringify(finishedData))
+            const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
+            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + isSecure ? "; Secure" : ""});
+            delete userData.UserPassword
+                delete userData.SecurityToken
+                    res.write(JSON.stringify(finishedData))
+            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+                    res.end();
+            } else {
+            delete userData.UserPassword
+                delete userData.SecurityToken
+            finishedData.Status = "InvalidPassword"
+            finishedData.UserInfo = userData;
+            res.end()
+            }
+                } else {
+                    finishedData.Status = "InvalidPassword"
+                    res.write(JSON.stringify(finishedData));
+                    res.end();
+                }
+          res.write(JSON.stringify(userData));
           res.end()
         }
     }
