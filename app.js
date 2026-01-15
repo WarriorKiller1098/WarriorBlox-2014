@@ -47,7 +47,7 @@ http.createServer(async function(req, res) {
     if (path.charAt(path.length - 1) == "?") {
         query = parsedpath.split("?")[1].replace("?", "")
     }
-    console.log("Method requested: " + req.method + ", with endpoint " + path);
+    console.log("Method requested: " + req.method + ", with endpoint " + path + "with query" + query);
     if (req.method == "GET") {
         if (path == "/") {
             sendf(res, "index.html");
