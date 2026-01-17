@@ -103,7 +103,8 @@ http.createServer(async function(req, res) {
           res.end(JSON.stringify({ message: 'Recieved successfully', yourData: postData }));
         } catch (error) {
           res.writeHead(400, { "Content-Type": "text/Plain" });
-          res.end("Error: bad JSON");
+          res.write("Error: bad JSON")
+          res.end();
         }
       });
         if (path == "/mobileapi/login") {
@@ -142,7 +143,8 @@ http.createServer(async function(req, res) {
         }
     } else {
       res.statusCode = 404;
-      res.end('Not found.');
+      res.write('Not found.')
+      res.end();
     }
 }).listen(port);
 
