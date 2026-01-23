@@ -131,12 +131,12 @@ http.createServer(async function(req, res) {
                 delete userData.SecurityToken
             finishedData.Status = "InvalidPassword"
             finishedData.UserInfo = userData;
-            res.end();
+            // res end
             }
                 } else {
                     finishedData.Status = "InvalidPassword"
                     res.write(JSON.stringify(finishedData));
-                    res.end();
+                    // res.end();
                 }
           res.write(JSON.stringify(userData));
           res.end();
