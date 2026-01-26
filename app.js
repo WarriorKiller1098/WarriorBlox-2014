@@ -149,11 +149,13 @@ http.createServer(async function(req, res) {
                 }
           res.write(JSON.stringify(userData));
           res.end();
+          return;
         }
     } else {
       res.statusCode = 404;
       res.write('Not found.')
       res.end();
+      return;
     }
 }).listen(port);
 
