@@ -16,4 +16,7 @@ And this will be better cus its based on original Roblox! So..
 
 Welcome, to, WB!
 
+WB is not affiliated/collabed with Roblox Corporation® in any way.
+This is a independent project runned and made by former WarriorKiller1098 (he literally wrote this lol i am him)
+
 Discord: https://discord.com/invite/mPMpByu4sv
