@@ -50,7 +50,7 @@ body {
 }
 
 .gametitle {
-    font-family: "Source Sans 3";
+    font-family: sans-serif;
     padding-top: 10px;
     font-size: 24px;
     font-weight: bold;
@@ -70,9 +70,10 @@ body {
 .infofooter {
     position: absolute;
     bottom: 0;
-    background-color: gray;
+    background-color: #d4d4d4;
     color: darkgray;
     padding: 20px;
+    width: 93%;
 }
 
 .infofooter-mainlinks {
