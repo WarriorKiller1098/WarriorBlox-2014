@@ -86,27 +86,6 @@ http.createServer(async function(req, res) {
         }
     }
     if (req.method == "POST") {
-      let body = "";
-
-      req.on('data', (chunk) => {
-        body + chunk.toString();
-      });
-
-      req.on('end', () => {
-        console.log("Recieved POSt body data:", body);
-
-        try {
-          const postJ = JSON.parse(body);
-          console.log("Parsed post JSON:", postJ);
-
-          res.writeHead(200, { "Content-Type": 'application/JSON' });
-          res.end(JSON.stringify({ message: 'Recieved successfully', yourData: postData }));
-        } catch (error) {
-          res.writeHead(400, { "Content-Type": "text/Plain" });
-          res.write("Error: bad JSON")
-          res.end();
-        }
-      });
         if (path == "/mobileapi/login") {
           const userData = await GetUserData("WBtest");
                 let finishedData = {
@@ -151,11 +130,6 @@ http.createServer(async function(req, res) {
           res.end();
           return;
         }
-    } else {
-      res.statusCode = 404;
-      res.write('Not found.')
-      res.end();
-      return;
     }
 }).listen(port);
 
