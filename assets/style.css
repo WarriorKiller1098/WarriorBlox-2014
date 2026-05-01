@@ -61,9 +61,9 @@ body {
     padding: 15px;
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 3px;
-    border: 2px black solid;
+    border: 1px black solid;
     width: 20%;
 }
 
@@ -74,8 +74,16 @@ body {
     color: black;
     padding: 20px;
     width: 93%;
+    align-content: center;
+    justify-content: center;
 }
 
 .infofooter-mainlinks {
     display: flex;
+}
+
+.infofooter-link {
+    padding-right: 10px;
+    text-decoration: none;
+    color: black;
 }
