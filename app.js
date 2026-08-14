@@ -56,6 +56,7 @@ http.createServer(async function(req, res) {
         if (path == "/") {
             //sendf(res, "index.html");
           res.write("Hello, Warrior here. Disabled everything for maintenance.);
+		  res.end()
         } else if (path == "/status") {
             res.write("i am... good and healthy :D");
             res.end();
