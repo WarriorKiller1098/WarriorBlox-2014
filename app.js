@@ -55,15 +55,15 @@ http.createServer(async function(req, res) {
     if (req.method == "GET") {
         if (path == "/") {
             //sendf(res, "index.html");
-          res.write("Hello, Warrior here. Disabled everything for maintenance.);
+           res.write("Hello, Warrior here. Disabled everything for maintenance.);
 		  res.end()
         } else if (path == "/status") {
             res.write("i am... good and healthy :D");
             res.end();
         } else if (path == "/games/list") {
             // sendf(res, "games/list.html");
-          res.write("Hello, Warrior here. Disabled everything for maintenance.);
-          res.end()
+               res.write("Hello, Warrior here. Disabled everything for maintenance.);
+               res.end()
         } else if (path == "/assets/logo.png") {
             sendf(res, "assets/logo.png");
             res.end();
@@ -78,8 +78,8 @@ http.createServer(async function(req, res) {
             res.end();
         } else if (path == "/games/start") {
             // sendf(res, "games/start.html");
-          res.write("Hello, Warrior here. Disabled everything for maintenance.);
-          res.end()
+               res.write("Hello, Warrior here. Disabled everything for maintenance.);
+               res.end()
         // 2015 trash sfuff
         } else if (path == "/home") {
             sendf(res, "2015/home.html");
@@ -89,8 +89,8 @@ http.createServer(async function(req, res) {
             res.end();
         } else if (path == "/mobile-app-upgrades") {
             // sendf(res, "other/mobile-app-upgrades.html");
-          res.write("Hello, Warrior here. Disabled everything for maintenance.);
-          res.end()
+               res.write("Hello, Warrior here. Disabled everything for maintenance.);
+               res.end()
         }
     }
     if (req.method == "POST") {
