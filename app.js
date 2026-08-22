@@ -125,12 +125,11 @@ http.createServer(async function(req, res) {
               
             }
                 } else {
-                    finishedData.Status = "InvalidPassword"
+                    finishedData.Status = "InvalidPassword";
                     res.write(JSON.stringify(finishedData));
                 }
           res.write(JSON.stringify(userData));
           res.end();
-          return;
         }
     }
 }).listen(port);
