@@ -33,10 +33,10 @@ process.on("SIGINT", async function() {
     console.log("\nClosing MongoDB connection!")
     process.exit();
 })
-           
 
+let db = client.db("WarriorBloxDB")
 async function GetUserData(username) {
-    let userData = await client.db("WarriorBloxDB").collection("users").findOne({UserName: username})
+    let userData = await db.collection("users").findOne({UserName: username})
     return userData
 }
 
@@ -124,7 +124,19 @@ http.createServer(async function(req, res) {
             finishedData.UserInfo = userData;
               
             }
-                } else {
+                } else if (path == "/test/acc") {
+					try {
+						await db.collection("users").insertOne({
+							UserName:iname,
+							UserPassword:"warrioblox",
+							UserID:1,
+							IsBanned:false,
+							SecurityToken:"thebesttoken.29320"
+						})
+					catch(err) {
+						res.write("Error ->" + err);
+					}
+				} else {
                     finishedData.Status = "InvalidPassword";
                     res.write(JSON.stringify(finishedData));
                 }
