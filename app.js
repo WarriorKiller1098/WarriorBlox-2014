@@ -35,7 +35,7 @@ process.on("SIGINT", async function() {
 })
            
 
-async function GetUserData(username) {
+async function GetUsername(username) {
     let userData = await client.db("WarriorBloxDB").collection("users").findOne({UserName: username})
     return userData
 }
@@ -106,11 +106,11 @@ http.createServer(async function(req, res) {
 			}
             const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
               
-            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + isSecure ? "; Secure" : ""});
+            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + (isSecure ? "; Secure" : "")});
               
             delete userData.UserPassword;
               
-                delete userData.SecurityToken
+                delete userData.SecurityToken;
                     res.write(JSON.stringify(finishedData))
               
             sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
