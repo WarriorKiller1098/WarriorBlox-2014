@@ -101,7 +101,7 @@ http.createServer(async function(req, res) {
                     finishedData.UserInfo = userData;
               
                     console.log(JSON.stringify(finishedData))
-            else {
+			} else {
 				res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃")
 			}
             const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
