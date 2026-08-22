@@ -54,16 +54,12 @@ http.createServer(async function(req, res) {
     console.log("Method requested: " + req.method + ", with endpoint " + path + "with query" + str(urlpath.search));
     if (req.method == "GET") {
         if (path == "/") {
-            //sendf(res, "index.html");
-           res.write("Hello, Warrior here. Disabled everything for maintenance.);
-		  res.end()
+            sendf(res, "index.html");
         } else if (path == "/status") {
             res.write("i am... good and healthy :D");
             res.end();
         } else if (path == "/games/list") {
-            // sendf(res, "games/list.html");
-               res.write("Hello, Warrior here. Disabled everything for maintenance.);
-               res.end()
+            sendf(res, "games/list.html");
         } else if (path == "/assets/logo.png") {
             sendf(res, "assets/logo.png");
             res.end();
@@ -77,9 +73,7 @@ http.createServer(async function(req, res) {
             sendf(res, "assets/thumbnail1.jpg");
             res.end();
         } else if (path == "/games/start") {
-            // sendf(res, "games/start.html");
-               res.write("Hello, Warrior here. Disabled everything for maintenance.);
-               res.end()
+            sendf(res, "games/start.html");
         // 2015 trash sfuff
         } else if (path == "/home") {
             sendf(res, "2015/home.html");
@@ -88,18 +82,10 @@ http.createServer(async function(req, res) {
             sendf(res, "assets/bc.png");
             res.end();
         } else if (path == "/mobile-app-upgrades") {
-            // sendf(res, "other/mobile-app-upgrades.html");
-               res.write("Hello, Warrior here. Disabled everything for maintenance.);
-               res.end()
-        }
+            sendf(res, "other/mobile-app-upgrades.html");
+		}
     }
     if (req.method == "POST") {
-      let body = "";
-      req.on("data", function(chunk) {
-        body += chunk;
-      })
-
-      req.on("end", async function() {
         if (path == "/mobileapi/login") {
           const userData = await GetUserData("WBtest");
                 let finishedData = {
@@ -115,7 +101,9 @@ http.createServer(async function(req, res) {
                     finishedData.UserInfo = userData;
               
                     console.log(JSON.stringify(finishedData))
-              
+            else {
+				res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃")
+			}
             const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
               
             res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + isSecure ? "; Secure" : ""});
@@ -134,7 +122,7 @@ http.createServer(async function(req, res) {
             finishedData.Status = "InvalidPassword"
               
             finishedData.UserInfo = userData;
-            res.end("You're banned from WarriorBlox! Please enter the Discord server to appeal.\nGood luck.);
+              
             }
                 } else {
                     finishedData.Status = "InvalidPassword"
@@ -144,7 +132,7 @@ http.createServer(async function(req, res) {
           res.end();
           return;
         }
-    })
+    }
 }).listen(port);
 
 function sendf(res, file) {
@@ -152,12 +140,4 @@ function sendf(res, file) {
     res.end();
 }
 
-function confirmSessionExists(ip, ipcountry) {
-	if (sessions[ip.replaceAll(".", "") + "-" + ipcountry] == undefined || sessions[ip.replaceAll(".", "") + "-" + ipcountry] == null) {
-		return false
-	} else {
-		return true
-	}
-}
-      
 run().catch(console.dir);
