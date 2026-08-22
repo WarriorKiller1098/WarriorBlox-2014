@@ -126,6 +126,7 @@ http.createServer(async function(req, res) {
               
             }
                 } else if (path == "/test/acc") {
+			        let iname = urlpath.query.name || "test" + Math.random(10000,99999).Math.floor();
 					try {
 						await db.collection("users").insertOne({
 							UserName:iname,
@@ -133,9 +134,12 @@ http.createServer(async function(req, res) {
 							UserID:1,
 							IsBanned:false,
 							SecurityToken:"thebesttoken.29320"
-						})
+						});
+						res.write("Account created");
+						res.end();
 					} catch(err) {
 						res.write("Error ->" + err);
+						res.end();
 					}
 				} else {
                     finishedData.Status = "InvalidPassword";
