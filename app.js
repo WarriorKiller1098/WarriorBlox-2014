@@ -35,6 +35,7 @@ process.on("SIGINT", async function() {
 })
 
 let db = client.db("WarriorBloxDB")
+
 async function GetUserData(username) {
     let userData = await db.collection("users").findOne({UserName: username})
     return userData
@@ -133,7 +134,7 @@ http.createServer(async function(req, res) {
 							IsBanned:false,
 							SecurityToken:"thebesttoken.29320"
 						})
-					catch(err) {
+					} catch(err) {
 						res.write("Error ->" + err);
 					}
 				} else {
