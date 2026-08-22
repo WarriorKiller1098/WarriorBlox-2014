@@ -35,7 +35,7 @@ process.on("SIGINT", async function() {
 })
            
 
-async function GetUsername(username) {
+async function GetUserData(username) {
     let userData = await client.db("WarriorBloxDB").collection("users").findOne({UserName: username})
     return userData
 }
@@ -131,7 +131,6 @@ http.createServer(async function(req, res) {
           res.write(JSON.stringify(userData));
           res.end();
         }
-    }
 }).listen(port);
 
 function sendf(res, file) {
