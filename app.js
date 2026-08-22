@@ -108,7 +108,7 @@ http.createServer(async function(req, res) {
               
             res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + isSecure ? "; Secure" : ""});
               
-            delete userData.UserPassword
+            delete userData.UserPassword;
               
                 delete userData.SecurityToken
                     res.write(JSON.stringify(finishedData))
@@ -117,9 +117,9 @@ http.createServer(async function(req, res) {
               
                     res.end();
             } else {
-            delete userData.UserPassword
-                delete userData.SecurityToken
-            finishedData.Status = "InvalidPassword"
+            delete userData.UserPassword;
+                delete userData.SecurityToken;
+            finishedData.Status = "InvalidPassword";
               
             finishedData.UserInfo = userData;
               
