@@ -133,14 +133,10 @@ http.createServer(async function(req, res) {
 					}
 					const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
 					res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + (isSecure ? "; Secure" : "")});
-					delete userData.UserPassword;
-					delete userData.SecurityToken;
                     res.write(JSON.stringify(finishedData));
 					sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
 					res.end();
 				} else {
-					delete userData.UserPassword;
-					delete userData.SecurityToken;
 					finishedData.Status = "InvalidPassword";
 					finishedData.UserInfo = userData;
 				}} else if (path == "/test/acc") {
