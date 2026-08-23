@@ -155,7 +155,7 @@ http.createServer(async function(req, res) {
 						res.write("Error ->" + err);
 						res.end();
 					}
-			} else if (path == "/mobileapi/logout" {
+			} else if (path == "/mobileapi/logout") {
 				res.writeHead(200);
 		        res.write("{'Status': 'OK'}");
 				sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = undefined;
