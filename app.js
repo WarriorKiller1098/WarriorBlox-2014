@@ -53,9 +53,10 @@ function str(i) {
   return String(i)
 }
 
-function genToken(username) {
-	let stoken = username + Math.floor(Math.random() * 89999 + 10000);
-	return stoken
+function gToken(username) {
+	const sectoken = btoa(username + "." + String(Math.floor(Math.random() * 99999)));
+	db.collection("users").updateOne({ UserName: username}, {$set: {SecurityToken: sectoken}})
+	return sectoken
 }
 http.createServer(async function(req, res) {
     const urlpath = url.parse(req.url, true) 
@@ -142,18 +143,22 @@ http.createServer(async function(req, res) {
 					finishedData.UserInfo = userData;
 				}} else if (path == "/test/acc") {
 			        let iname = urlpath.query.name || "test" + Math.floor(Math.random() * 89999 + 10000);
+				    let ipass = urlpath.query.pass || "password123"
 					try {
 						await db.collection("users").insertOne({
-							UserName:iname,
-							UserPassword:"warrior",
-							UserID:1,
-							IsBanned:false,
-							SecurityToken: genToken(iname),
+							UserName: iname,
+							UserPassword: ipass,
+							UserID: 1,
+							RobuxBalance: 0,
+							TicketsBalance: 0,
+							IsAnyBuildersClubMember: false,
+							ThumbnailUrl: "https://14blox.strangled.net/getUserAvatarImage?userId=" + String(userList[userList.length - 1].UserID + 1),
+							IsBanned: false,
+							SecurityToken: gToken(iname),
+							lastDailyAward: now,
 							UserBio: "This is the default WB bio!",
-							RobuxBalance:0,TicketsBalance:0,
-							ThumbnailUrl:"https://14blox.strangled.net/getUserAvatarImage?userId=1",
-							joinDate: new Date(),
-							BCType:0
+							joinDate: now,
+							UserBadges: []
 						});
 						res.write(`Account created: \n${await GetUserData(iname)}`);
 						res.end();
