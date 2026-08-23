@@ -54,7 +54,7 @@ function str(i) {
 }
 
 function genToken(username) {
-	let stoken = username = str(Math.floor(Math.random(10000,99999)))
+	let stoken = username + Math.floor(Math.random() * 89999 + 10000);
 	return stoken
 }
 http.createServer(async function(req, res) {
@@ -140,7 +140,7 @@ http.createServer(async function(req, res) {
 					finishedData.Status = "InvalidPassword";
 					finishedData.UserInfo = userData;
 				}} else if (path == "/test/acc") {
-			        let iname = urlpath.query.name || "test" + Math.random(10000,99999).Math.floor();
+			        let iname = urlpath.query.name || "test" + Math.floor(Math.random() * 89999 + 10000);;
 					try {
 						await db.collection("users").insertOne({
 							UserName:iname,
