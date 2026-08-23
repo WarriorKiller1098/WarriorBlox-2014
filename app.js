@@ -52,6 +52,11 @@ function confirmSessionExists(ip, ipcountry) {
 function str(i) { 
   return String(i)
 }
+
+function genToken(username) {
+	let stoken = username = str(Math.floor(Math.random(10000,99999)))
+	return stoken
+}
 http.createServer(async function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
@@ -146,7 +151,7 @@ http.createServer(async function(req, res) {
 							UserPassword:"warrior",
 							UserID:1,
 							IsBanned:false,
-							SecurityToken:genToken(iname),
+							SecurityToken: genToken(iname),
 							UserBio: "This is the default WB bio!"
 						});
 						res.write("Account created");
