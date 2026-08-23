@@ -112,7 +112,7 @@ http.createServer(async function(req, res) {
 				const userdata = body.split("&");
 				const username = userdata[0].split("=")[1];
 				const userpass = userdata[1].split("=")[1];
-				const userData = await GetUserData("WBtest");
+				const userData = await GetUserData(username);
                 let finishedData = {
                     Status: "",
                     UserInfo: ""
