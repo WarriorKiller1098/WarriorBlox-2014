@@ -155,12 +155,15 @@ http.createServer(async function(req, res) {
 						res.write("Error ->" + err);
 						res.end();
 					}
-				} else {
+			} else if (path == "/mobileapi/logout" {
+				res.writeHead(200);
+		        res.write("{'Status': 'OK'}");
+				sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = undefined;
+				res.end();
+			} else {
                     finishedData.Status = "InvalidPassword";
                     res.write(JSON.stringify(finishedData));
                 }
-          res.write(JSON.stringify(userData));
-          res.end();
         })}
 }).listen(port);
 
