@@ -95,26 +95,24 @@ http.createServer(async function(req, res) {
 		}
     }
     if (req.method == "POST") {
-        if (path == "/mobileapi/login") {
-			
-			let body = "";
-			req.on("data", function(chunk) {
-				body += chunk;
-			})
+		let body = "";
+		req.on("data", function(chunk) {
+			body += chunk;
+		})
 
-			req.on("end", async function() {
-				if (path == "/mobileapi/login") {
-					if confirmSessionExists(connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]) {
-						res.end("You are already logged in, sir.");
-					}
-					console.log(body);
-					if (body == undefined) {
-						res.end("{'Status': 'MissingRequiredField'}");
-					}
-					const userdata = body.split("&");
-					const username = userdata[0].split("=")[1];
-					const userpass = userdata[1].split("=")[1];
-					const userData = await GetUserData("WBtest");
+		req.on("end", async function() {
+			if (path == "/mobileapi/login") {
+				if (confirmSessionExists(connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"])) {
+					res.end("You are already logged in, sir.");
+				}
+				console.log(body);
+				if (body == undefined) {
+					res.end("{'Status': 'MissingRequiredField'}");
+				}
+				const userdata = body.split("&");
+				const username = userdata[0].split("=")[1];
+				const userpass = userdata[1].split("=")[1];
+				const userData = await GetUserData("WBtest");
                 let finishedData = {
                     Status: "",
                     UserInfo: ""
@@ -149,7 +147,6 @@ http.createServer(async function(req, res) {
             finishedData.Status = "InvalidPassword";
               
             finishedData.UserInfo = userData;
-              
 				}}
 			})
 			
