@@ -119,39 +119,26 @@ http.createServer(async function(req, res) {
                 }
                 console.log(userData);
                 if ((userData != null && userData.UserPassword != null) && userData.UserPassword == "testpass") {
-            if (userData.IsBanned == false) {
-              
-                    finishedData.Status = "OK"
-              
-                    finishedData.UserInfo = userData;
-              
-                    console.log(JSON.stringify(finishedData))
-			} else {
-				res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃")
-			}
-            const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
-              
-            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + (isSecure ? "; Secure" : "")});
-              
-            delete userData.UserPassword;
-              
-                delete userData.SecurityToken;
-                    res.write(JSON.stringify(finishedData))
-              
-            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
-              
-                    res.end();
-            } else {
-            delete userData.UserPassword;
-                delete userData.SecurityToken;
-            finishedData.Status = "InvalidPassword";
-              
-            finishedData.UserInfo = userData;
-				}}
-			})
-			
-           
-                } else if (path == "/test/acc") {
+					if (userData.IsBanned == false) {
+						finishedData.Status = "OK"
+						finishedData.UserInfo = userData;
+						console.log(JSON.stringify(finishedData))
+					} else {
+						res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃")
+					}
+					const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
+					res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + (isSecure ? "; Secure" : "")});
+					delete userData.UserPassword;
+					delete userData.SecurityToken;
+                    res.write(JSON.stringify(finishedData));
+					sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+					res.end();
+				} else {
+					delete userData.UserPassword;
+					delete userData.SecurityToken;
+					finishedData.Status = "InvalidPassword";
+					finishedData.UserInfo = userData;
+				}} else if (path == "/test/acc") {
 			        let iname = urlpath.query.name || "test" + Math.random(10000,99999).Math.floor();
 					try {
 						await db.collection("users").insertOne({
@@ -174,7 +161,7 @@ http.createServer(async function(req, res) {
                 }
           res.write(JSON.stringify(userData));
           res.end();
-        }
+        }})
 }).listen(port);
 
 function sendf(res, file) {
