@@ -110,7 +110,7 @@ http.createServer(async function(req, res) {
 				if (confirmSessionExists(req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"])) {
 					res.end("You are already logged in, sir.");
 				}
-				console.log(body);
+				console.log("Body:\n" + body + "\n\n");
 				if (body == undefined) {
 					res.end("{'Status': 'MissingRequiredField'}");
 				}
@@ -122,14 +122,15 @@ http.createServer(async function(req, res) {
                     Status: "",
                     UserInfo: ""
                 }
-                console.log(userData);
+                console.log("UserData: " + userData + "\n\n");
                 if ((userData != null && userData.UserPassword != null) && userData.UserPassword == "testpass") {
 					if (userData.IsBanned == false) {
 						finishedData.Status = "OK"
 						finishedData.UserInfo = userData;
-						console.log(JSON.stringify(finishedData))
+						console.log(JSON.stringify(finishedData));
+						console.log("1: Account login.");
 					} else {
-						res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃")
+						res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃");
 					}
 					const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
 					res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + (isSecure ? "; Secure" : "")});
@@ -140,7 +141,7 @@ http.createServer(async function(req, res) {
 					finishedData.Status = "InvalidPassword";
 					finishedData.UserInfo = userData;
 				}} else if (path == "/test/acc") {
-			        let iname = urlpath.query.name || "test" + Math.floor(Math.random() * 89999 + 10000);;
+			        let iname = urlpath.query.name || "test" + Math.floor(Math.random() * 89999 + 10000);
 					try {
 						await db.collection("users").insertOne({
 							UserName:iname,
@@ -154,7 +155,7 @@ http.createServer(async function(req, res) {
 							joinDate: new Date(),
 							BCType:0
 						});
-						res.write("Account created");
+						res.write(`Account created: \n${await GetUserData(iname)}`);
 						res.end();
 					} catch(err) {
 						res.write("Error ->" + err);
