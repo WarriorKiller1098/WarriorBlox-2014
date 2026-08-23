@@ -161,7 +161,7 @@ http.createServer(async function(req, res) {
                 }
           res.write(JSON.stringify(userData));
           res.end();
-        }})
+        })}
 }).listen(port);
 
 function sendf(res, file) {
