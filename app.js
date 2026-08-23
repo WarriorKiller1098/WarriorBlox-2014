@@ -152,7 +152,7 @@ http.createServer(async function(req, res) {
 							RobuxBalance: 0,
 							TicketsBalance: 0,
 							IsAnyBuildersClubMember: false,
-							ThumbnailUrl: "https://14blox.strangled.net/getUserAvatarImage?userId=" + String(userList[userList.length - 1].UserID + 1),
+							ThumbnailUrl: "https://14blox.strangled.net/getUserAvatarImage?userId=1",
 							IsBanned: false,
 							SecurityToken: gToken(iname),
 							lastDailyAward: now,
