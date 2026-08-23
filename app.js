@@ -124,7 +124,7 @@ http.createServer(async function(req, res) {
                     UserInfo: ""
                 }
                 console.log("UserData: " + userData + "\n\n");
-                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == "testpass") {
+                if ((userData != null && userData.UserPassword != null) /*&& userData.UserPassword == "testpass"*/) {
 					if (userData.IsBanned == false) {
 						finishedData.Status = "OK"
 						finishedData.UserInfo = userData;
@@ -144,6 +144,7 @@ http.createServer(async function(req, res) {
 				}} else if (path == "/test/acc") {
 			        let iname = urlpath.query.name || "test" + Math.floor(Math.random() * 89999 + 10000);
 				    let ipass = urlpath.query.pass || "password123"
+				    let now = new Date();
 					try {
 						await db.collection("users").insertOne({
 							UserName: iname,
