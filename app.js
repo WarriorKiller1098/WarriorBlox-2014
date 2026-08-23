@@ -152,7 +152,11 @@ http.createServer(async function(req, res) {
 							UserID:1,
 							IsBanned:false,
 							SecurityToken: genToken(iname),
-							UserBio: "This is the default WB bio!"
+							UserBio: "This is the default WB bio!",
+							RobuxBalance:0,TicketsBalance:0,
+							ThumbnailUrl:"https://14blox.strangled.net/getUserAvatarImage?userId=1",
+							joinDate: new Date(),
+							BCType:0
 						});
 						res.write("Account created");
 						res.end();
