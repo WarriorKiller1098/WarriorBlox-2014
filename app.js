@@ -22,9 +22,9 @@ async function run() {
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    console.log("Successfully connected to MongoDB!");
   } catch(err) {
-    console.error("Failed to connect to MongoDB", err);
+    console.error("Failed to connect to MongoDB: ", err);
     process.exit(1);
   }
 }
@@ -102,7 +102,7 @@ http.createServer(async function(req, res) {
 
 		req.on("end", async function() {
 			if (path == "/mobileapi/login") {
-				if (confirmSessionExists(connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"])) {
+				if (confirmSessionExists(req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"])) {
 					res.end("You are already logged in, sir.");
 				}
 				console.log(body);
