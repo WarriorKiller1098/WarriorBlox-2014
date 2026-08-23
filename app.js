@@ -41,6 +41,14 @@ async function GetUserData(username) {
     return userData
 }
 
+function confirmSessionExists(ip, ipcountry) {
+	if (sessions[ip.replaceAll(".", "") + "-" + ipcountry] == undefined || sessions[ip.replaceAll(".", "") + "-" + ipcountry] == null) {
+		return false
+	} else {
+		return true
+	}
+}
+
 function str(i) { 
   return String(i)
 }
@@ -88,7 +96,25 @@ http.createServer(async function(req, res) {
     }
     if (req.method == "POST") {
         if (path == "/mobileapi/login") {
-          const userData = await GetUserData("WBtest");
+			
+			let body = "";
+			req.on("data", function(chunk) {
+				body += chunk;
+			})
+
+			req.on("end", async function() {
+				if (path == "/mobileapi/login") {
+					if confirmSessionExists(connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]) {
+						res.end("You are already logged in, sir.");
+					}
+					console.log(body);
+					if (body == undefined) {
+						res.end("{'Status': 'MissingRequiredField'}");
+					}
+					const userdata = body.split("&");
+					const username = userdata[0].split("=")[1];
+					const userpass = userdata[1].split("=")[1];
+					const userData = await GetUserData("WBtest");
                 let finishedData = {
                     Status: "",
                     UserInfo: ""
@@ -124,16 +150,20 @@ http.createServer(async function(req, res) {
               
             finishedData.UserInfo = userData;
               
-            }
+				}}
+			})
+			
+           
                 } else if (path == "/test/acc") {
 			        let iname = urlpath.query.name || "test" + Math.random(10000,99999).Math.floor();
 					try {
 						await db.collection("users").insertOne({
 							UserName:iname,
-							UserPassword:"warrioblox",
+							UserPassword:"warrior",
 							UserID:1,
 							IsBanned:false,
-							SecurityToken:"thebesttoken.29320"
+							SecurityToken:genToken(iname),
+							UserBio: "This is the default WB bio!"
 						});
 						res.write("Account created");
 						res.end();
@@ -156,3 +186,43 @@ function sendf(res, file) {
 }
 
 run().catch(console.dir);
+
+
+
+/*const userData = await GetUserData("WBtest");
+                let finishedData = {
+                    Status: "",
+                    UserInfo: ""
+                }
+                console.log(userData);
+                if ((userData != null && userData.UserPassword != null) && userData.UserPassword == "testpass") {
+            if (userData.IsBanned == false) {
+              
+                    finishedData.Status = "OK"
+              
+                    finishedData.UserInfo = userData;
+              
+                    console.log(JSON.stringify(finishedData))
+			} else {
+				res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃")
+			}
+            const isSecure = req.connection.encrypted || req.headers['x-forwarded-proto'] === 'https';
+              
+            res.writeHead(200, {'Set-Cookie': "username=" + userData.SecurityToken + "; SameSite=Strict" + (isSecure ? "; Secure" : "")});
+              
+            delete userData.UserPassword;
+              
+                delete userData.SecurityToken;
+                    res.write(JSON.stringify(finishedData))
+              
+            sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+              
+                    res.end();
+            } else {
+            delete userData.UserPassword;
+                delete userData.SecurityToken;
+            finishedData.Status = "InvalidPassword";
+              
+            finishedData.UserInfo = userData; */
+              
+				}*/
