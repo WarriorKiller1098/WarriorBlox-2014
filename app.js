@@ -174,6 +174,11 @@ http.createServer(async function(req, res) {
 		        res.write("{'Status': 'OK'}");
 				sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = undefined;
 				res.end();
+			} else if (path == "/validatepasswordforsignup"){
+				res.writeHead(200);
+				const udata = body.split("&")
+				const password = udata[0].split("=")[0]	
+				res.end("{'success': true}")
 			} else {
                     finishedData.Status = "InvalidPassword";
                     res.write(JSON.stringify(finishedData));
