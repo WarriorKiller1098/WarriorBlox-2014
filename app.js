@@ -66,7 +66,7 @@ http.createServer(async function(req, res) {
     if (path.charAt(path.length - 1) == "?") {
         query = parsedpath.split("?")[1].replace("?", "")
     }
-    console.log("Method requested: " + req.method + ", with endpoint " + path + "with query" + str(urlpath.search));
+    console.log("Method requested: " + req.method + ", with endpoint " + path + "with query " + query);
     if (req.method == "GET") {
         if (path == "/") {
             sendf(res, "index.html");
@@ -107,11 +107,11 @@ http.createServer(async function(req, res) {
 		})
 
 		req.on("end", async function() {
+			console.log("Body:\n" + body + "\n\n");
 			if (path == "/mobileapi/login") {
 				if (confirmSessionExists(req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"])) {
 					res.end("You are already logged in, sir.");
 				}
-				console.log("Body:\n" + body + "\n\n");
 				if (body == undefined) {
 					res.end("{'Status': 'MissingRequiredField'}");
 				}
@@ -123,13 +123,13 @@ http.createServer(async function(req, res) {
                     Status: "",
                     UserInfo: ""
                 }
-                console.log("UserData: " + userData + "\n\n");
+                console.log("User data:\n" + userData + "\n\n");
                 if ((userData != null && userData.UserPassword != null) /*&& userData.UserPassword == "testpass"*/) {
 					if (userData.IsBanned == false) {
 						finishedData.Status = "OK"
 						finishedData.UserInfo = userData;
 						console.log(JSON.stringify(finishedData));
-						console.log("1: Account login.");
+						console.log("Succesfully logged in to the account! :D");
 					} else {
 						res.end("You're banned from WarriorBlox! Please go to the Discord server and appeal. thanks. 😃");
 					}
@@ -141,14 +141,15 @@ http.createServer(async function(req, res) {
 				} else {
 					finishedData.Status = "InvalidPassword";
 					finishedData.UserInfo = userData;
-				}} else if (path == "/test/acc") {
-			        let iname = urlpath.query.name || "test" + Math.floor(Math.random() * 89999 + 10000);
-				    let ipass = urlpath.query.pass || "password123"
+				}} else if (path == "/mobileapi/signup" || path == "/mobileapi/securesignup") {
+			        const userdata = body.split("&");
+				    const username = userdata[0].split("=")[1];
+				    const userpass = userdata[1].split("=")[1];
 				    let now = new Date();
 					try {
-						await db.collection("users").insertOne({
-							UserName: iname,
-							UserPassword: ipass,
+						let userData = {
+							UserName: username,
+							UserPassword: userpass,
 							UserID: 1,
 							RobuxBalance: 0,
 							TicketsBalance: 0,
@@ -160,11 +161,12 @@ http.createServer(async function(req, res) {
 							UserBio: "This is the default WB bio!",
 							joinDate: now,
 							UserBadges: []
-						});
-						res.write(`Account created: \n${await GetUserData(iname)}`);
-						res.end();
+						};
+						res.write("{'Status': 'OK', 'UserInfo': " + JSON.stringify(userData) + "}");
+						sessions[req.connection.remoteAddress.replaceAll(".", "") + "-" + req.headers["cf-ipcountry"]] = { UserName: userData.UserName, UserID: userData.UserID };
+						res.end()
 					} catch(err) {
-						res.write("Error ->" + err);
+						res.write("Error -> " + err);
 						res.end();
 					}
 			} else if (path == "/mobileapi/logout") {
