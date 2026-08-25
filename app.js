@@ -6,7 +6,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const process = require("process")
 const uri = process.env.MONGO_URI
 let sessions = {}
-
+const DAILY_TIX = 10;
+const DAILY_CHECK_INTERVAL = 60 * 60 * 24 * 1000;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -58,6 +59,11 @@ function gToken(username) {
 	db.collection("users").updateOne({ UserName: username}, {$set: {SecurityToken: sectoken}})
 	return sectoken
 }
+setInterval(async function() {
+	await db.collection("users").updateMany({}, {"$inc": {"TicketsBalance": 1}})
+	console.log("Incremented all users")
+}, DAILY_CHECK_INTERVAL)
+
 http.createServer(async function(req, res) {
     const urlpath = url.parse(req.url, true) 
     const parsedpath = urlpath.path
@@ -146,11 +152,12 @@ http.createServer(async function(req, res) {
 				    const username = userdata[0].split("=")[1];
 				    const userpass = userdata[1].split("=")[1];
 				    let now = new Date();
+				    let userList = db.collection("users").find({}).toArray();
 					try {
 						let userData = {
 							UserName: username,
 							UserPassword: userpass,
-							UserID: 1,
+							UserID: userList[userList.length - 1].UserID + 1,
 							RobuxBalance: 0,
 							TicketsBalance: 0,
 							IsAnyBuildersClubMember: false,
@@ -180,9 +187,8 @@ http.createServer(async function(req, res) {
 				const password = udata[0].split("=")[0]	
 				res.end("{'success': true}")
 			} else {
-                    finishedData.Status = "InvalidPassword";
-                    res.write(JSON.stringify(finishedData));
-                }
+                res.end()
+            }
         })}
 }).listen(port);
 
