@@ -130,7 +130,7 @@ http.createServer(async function(req, res) {
                     UserInfo: ""
                 }
                 console.log("User data:\n" + userData + "\n\n");
-                if ((userData != null && userData.UserPassword != null && userpass == userData.UserPassword) /*&& userData.UserPassword == "testpass"*/) {
+                if ((userData != null && userData.UserPassword != null && userpass == userData.UserPassword == userpass) /*&& userData.UserPassword == "testpass"*/) {
 					if (userData.IsBanned == false) {
 						finishedData.Status = "OK"
 						finishedData.UserInfo = userData;
@@ -147,6 +147,7 @@ http.createServer(async function(req, res) {
 				} else {
 					finishedData.Status = "InvalidPassword";
 					finishedData.UserInfo = userData;
+					console.log("Someone requested for account with wrong password!");
 				}} else if (path == "/mobileapi/signup" || path == "/mobileapi/securesignup") {
 			        const userdata = body.split("&");
 				    const username = userdata[0].split("=")[1];
