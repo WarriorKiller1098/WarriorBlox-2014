@@ -124,7 +124,7 @@ http.createServer(async function(req, res) {
                     UserInfo: ""
                 }
                 console.log("User data:\n" + userData + "\n\n");
-                if ((userData != null && userData.UserPassword != null) /*&& userData.UserPassword == "testpass"*/) {
+                if ((userData != null && userData.UserPassword != null && userpass == userData.UserPassword) /*&& userData.UserPassword == "testpass"*/) {
 					if (userData.IsBanned == false) {
 						finishedData.Status = "OK"
 						finishedData.UserInfo = userData;
